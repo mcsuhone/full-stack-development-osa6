@@ -6,12 +6,25 @@ const notificationSlice = createSlice({
   name: 'notification',
   initialState,
   reducers: {
-    changeNotification(state, action) {
-      if (action.payload) {
-        return "you voted '" + action.payload + "'"
-      }
-      else {
-        return null
+    changeNotification: {
+      reducer: (state, action) => {
+        if (action.payload.text) {
+          return {
+            content: "you voted '" + action.payload.text + "'",
+            timeout: action.payload.timeout
+          }
+        }
+        else {
+          return null
+        }
+      },
+      prepare: (text, time_in_seconds) => {
+        return {
+          payload: {
+            text: text,
+            timeout: time_in_seconds * 1000,
+          }
+        }
       }
     }
   }
