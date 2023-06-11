@@ -9,10 +9,7 @@ const AnecdoteList = () => {
 
   const vote = (anecdote) => {
     dispatch(voteAnecdote(anecdote))
-    dispatch(changeNotification(anecdote.content))
-    setTimeout(() => {
-      dispatch(changeNotification(null))
-    }, 5000)
+    dispatch(changeNotification(anecdote.content, 5))
   }
 
   return (
